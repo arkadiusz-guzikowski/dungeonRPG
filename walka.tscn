@@ -117,6 +117,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "— pusto —"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="DropButton" type="Button" parent="DropPanel/Margin/VBox"]
 layout_mode = 2

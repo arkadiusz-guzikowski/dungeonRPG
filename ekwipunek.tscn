@@ -1,0 +1,348 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://ekwipunek.gd" id="1_ekwipunek"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.12, 0.12, 0.16, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
+bg_color = Color(0.18, 0.18, 0.22, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.45, 0.45, 0.5, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Ekwipunek" type="CanvasLayer"]
+script = ExtResource("1_ekwipunek")
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 130.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Tytul" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 14
+text = "EKWIPUNEK"
+horizontal_alignment = 1
+
+[node name="Slots" type="HBoxContainer" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Slot1" type="PanelContainer" parent="Panel/Margin/VBox/Slots"]
+custom_minimum_size = Vector2(48, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/VBox/Slots/Slot1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="Panel/Margin/VBox/Slots/Slot1/VBox"]
+custom_minimum_size = Vector2(32, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="Panel/Margin/VBox/Slots/Slot1/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="Slot2" type="PanelContainer" parent="Panel/Margin/VBox/Slots"]
+custom_minimum_size = Vector2(48, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/VBox/Slots/Slot2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="Panel/Margin/VBox/Slots/Slot2/VBox"]
+custom_minimum_size = Vector2(32, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="Panel/Margin/VBox/Slots/Slot2/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="Slot3" type="PanelContainer" parent="Panel/Margin/VBox/Slots"]
+custom_minimum_size = Vector2(48, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/VBox/Slots/Slot3"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="Panel/Margin/VBox/Slots/Slot3/VBox"]
+custom_minimum_size = Vector2(32, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="Panel/Margin/VBox/Slots/Slot3/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="Slot4" type="PanelContainer" parent="Panel/Margin/VBox/Slots"]
+custom_minimum_size = Vector2(48, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin/VBox/Slots/Slot4"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="Panel/Margin/VBox/Slots/Slot4/VBox"]
+custom_minimum_size = Vector2(32, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="Panel/Margin/VBox/Slots/Slot4/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PlecakPanel" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 140.0
+offset_right = -10.0
+offset_bottom = 290.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="PlecakPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Tytul" type="Label" parent="PlecakPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.85, 1, 1)
+theme_override_font_sizes/font_size = 14
+text = "PLECAK"
+horizontal_alignment = 1
+
+[node name="Grid" type="GridContainer" parent="PlecakPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 3
+
+[node name="PSlot1" type="PanelContainer" parent="PlecakPanel/Margin/VBox/Grid"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin/VBox/Grid/PSlot1"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="PlecakPanel/Margin/VBox/Grid/PSlot1/VBox"]
+custom_minimum_size = Vector2(28, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="PlecakPanel/Margin/VBox/Grid/PSlot1/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PSlot2" type="PanelContainer" parent="PlecakPanel/Margin/VBox/Grid"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin/VBox/Grid/PSlot2"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="PlecakPanel/Margin/VBox/Grid/PSlot2/VBox"]
+custom_minimum_size = Vector2(28, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="PlecakPanel/Margin/VBox/Grid/PSlot2/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PSlot3" type="PanelContainer" parent="PlecakPanel/Margin/VBox/Grid"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin/VBox/Grid/PSlot3"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="PlecakPanel/Margin/VBox/Grid/PSlot3/VBox"]
+custom_minimum_size = Vector2(28, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="PlecakPanel/Margin/VBox/Grid/PSlot3/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PSlot4" type="PanelContainer" parent="PlecakPanel/Margin/VBox/Grid"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin/VBox/Grid/PSlot4"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="PlecakPanel/Margin/VBox/Grid/PSlot4/VBox"]
+custom_minimum_size = Vector2(28, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="PlecakPanel/Margin/VBox/Grid/PSlot4/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PSlot5" type="PanelContainer" parent="PlecakPanel/Margin/VBox/Grid"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin/VBox/Grid/PSlot5"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="PlecakPanel/Margin/VBox/Grid/PSlot5/VBox"]
+custom_minimum_size = Vector2(28, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="PlecakPanel/Margin/VBox/Grid/PSlot5/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PSlot6" type="PanelContainer" parent="PlecakPanel/Margin/VBox/Grid"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="PlecakPanel/Margin/VBox/Grid/PSlot6"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="PlecakPanel/Margin/VBox/Grid/PSlot6/VBox"]
+custom_minimum_size = Vector2(28, 18)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="PlecakPanel/Margin/VBox/Grid/PSlot6/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 8
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1

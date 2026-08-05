@@ -16,6 +16,8 @@ const STATYSTYKI := {
 
 @export var czas_niewidoczny: float = 5.0
 @export var czas_widoczny: float = 10.0
+@export_range(0.0, 60.0, 0.5)
+var czas_respawnu: float = 15.0
 
 var male_potwory: Array[Polygon2D] = []
 var champion: Polygon2D
@@ -106,3 +108,23 @@ func _petla_championa() -> void:
 		await get_tree().create_timer(czas_widoczny).timeout
 		if champion:
 			champion.visible = false
+
+
+func respawnuj(potwor: Polygon2D) -> void:
+	# Champion ma wlasna petle - NIE respimy go tutaj
+	if potwor == null or potwor == champion:
+		return
+	_respawnuj_po_15s(potwor)
+
+
+func _respawnuj_po_15s(potwor: Polygon2D) -> void:
+	await get_tree().create_timer(czas_respawnu).timeout
+	if not is_instance_valid(potwor):
+		return
+	if not is_inside_tree():
+		return
+	# Losowy typ zwyklego potwora (Zombi/Ghul/Skeleton) - NIGDY nie champion
+	var typy: Array[Color] = [KOLOR_ZOMBI, KOLOR_GHUL, KOLOR_SKELETON]
+	potwor.color = typy[randi() % typy.size()]
+	potwor.position = _losowa_pozycja(_rozmiar_potwora(potwor))
+	potwor.visible = true

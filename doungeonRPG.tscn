@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://potwory.tscn" id="2_potwory"]
 [ext_resource type="PackedScene" path="res://gracz.tscn" id="3_gracz"]
 [ext_resource type="PackedScene" path="res://walka.tscn" id="4_walka"]
+[ext_resource type="PackedScene" path="res://ekwipunek.tscn" id="5_ekwipunek"]
 
 [node name="Node2D" type="Node2D" unique_id=2028494352]
 script = ExtResource("0_main")
@@ -16,6 +17,7 @@ rozmiar_mapy = Vector2(400, 200)
 
 [node name="Potwory" parent="." unique_id=488659601 instance=ExtResource("2_potwory")]
 position = Vector2(126, 24)
+czas_respawnu = null
 
 [node name="Gracz" parent="." unique_id=2096362487 instance=ExtResource("3_gracz")]
 position = Vector2(610, 62)
@@ -23,3 +25,10 @@ position = Vector2(610, 62)
 [node name="Walka" parent="." unique_id=517899344 instance=ExtResource("4_walka")]
 czas_miedzy_turami = 0.2
 czas_po_ataku = 0.15
+waga_zwykly = 20.0
+waga_plus1 = 20.0
+waga_plus2 = 20.0
+waga_plus4 = 7.0
+waga_plus5 = 3.0
+
+[node name="Ekwipunek" parent="." unique_id=-546747729 instance=ExtResource("5_ekwipunek")]

@@ -9,6 +9,27 @@ var czas_po_ataku: float = 0.35
 @export_range(0.0, 5.0, 0.05)
 var czas_po_wygranej: float = 1.0
 
+# ==== USTAWIENIA DROPU (edytowalne w inspektorze) ====
+# Kazdy przedmiot losuje sie NIEZALEZNIE - moze wypasc nic, jedno lub oba
+@export_range(0.0, 1.0, 0.01)
+var szansa_mikstury: float = 0.5
+@export_range(0.0, 1.0, 0.01)
+var szansa_przedmiotu: float = 0.5
+@export_range(0.0, 1.0, 0.01)
+var szansa_miecza: float = 0.5
+@export_range(0.0, 100.0, 1.0)
+var waga_zwykly: float = 40.0
+@export_range(0.0, 100.0, 1.0)
+var waga_plus1: float = 25.0
+@export_range(0.0, 100.0, 1.0)
+var waga_plus2: float = 15.0
+@export_range(0.0, 100.0, 1.0)
+var waga_plus3: float = 10.0
+@export_range(0.0, 100.0, 1.0)
+var waga_plus4: float = 6.0
+@export_range(0.0, 100.0, 1.0)
+var waga_plus5: float = 4.0
+
 var gracz: Node2D
 var potwor: Polygon2D
 var potwor_nazwa: String = ""
@@ -128,8 +149,61 @@ func _wygrana() -> void:
 	_dodaj_log("🏆 Pokonałeś %s!" % potwor_nazwa)
 	if potwor:
 		potwor.visible = false
+		var potwory = get_node_or_null("/root/Node2D/Potwory")
+		if potwory and potwory.has_method("respawnuj"):
+			potwory.respawnuj(potwor)
+	var dropy: Array = _losuj_dropy()
+	var ekwipunek = get_node_or_null("/root/Node2D/Ekwipunek")
+	for drop in dropy:
+		if ekwipunek and ekwipunek.has_method("dodaj_przedmiot"):
+			ekwipunek.dodaj_przedmiot(drop)
+	var content: Label = $DropPanel/Margin/VBox/DropContent
+	if dropy.size() > 0:
+		content.text = "Wypadło: %s" % ", ".join(PackedStringArray(dropy))
+		_dodaj_log("🎁 Drop: %s" % ", ".join(PackedStringArray(dropy)))
+	else:
+		content.text = "Nic nie wypadło... 🍀"
+		_dodaj_log("Nic nie wypadło...")
 	await get_tree().create_timer(czas_po_wygranej).timeout
 	drop_panel.visible = true
+
+
+func _losuj_dropy() -> Array:
+	# Kazdy drop losuje sie NIEZALEZNIE - z jednego potwora moze wypasc:
+	# - nic
+	# - tylko mikstura
+	# - tylko JEDEN przedmiot ekwipunku (Miecz ALBO Tarcza)
+	# - mikstura + jeden przedmiot ekwipunku
+	# NIGDY nie wypadaja dwa przedmioty ekwipunku naraz
+	var wynik: Array = []
+	if randf() < szansa_mikstury:
+		wynik.append("Mikstura zycia")
+	if randf() < szansa_przedmiotu:
+		var typ: String = "Miecz" if randf() < szansa_miecza else "Tarcza"
+		wynik.append(_nazwa_z_poziomem(typ, _losuj_poziom()))
+	return wynik
+
+
+func _losuj_poziom() -> int:
+	# Wagi poziomow z inspektora (domyslnie 40/25/15/10/6/4)
+	var wagi: Array[float] = [waga_zwykly, waga_plus1, waga_plus2, waga_plus3, waga_plus4, waga_plus5]
+	var suma: float = 0.0
+	for w in wagi:
+		suma += w
+	if suma <= 0.0:
+		return 0
+	var los: float = randf() * suma
+	for i in range(wagi.size()):
+		los -= wagi[i]
+		if los <= 0.0:
+			return i
+	return 0
+
+
+func _nazwa_z_poziomem(baza: String, poziom: int) -> String:
+	if poziom == 0:
+		return baza
+	return "%s +%d" % [baza, poziom]
 
 
 func _przegrana() -> void:
