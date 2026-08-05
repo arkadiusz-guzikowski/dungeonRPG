@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://ekwipunek.gd" id="1_ekwipunek"]
+[ext_resource type="Script" path="res://wskaznik_kowala.gd" id="2_wskaznik"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
 bg_color = Color(0.12, 0.12, 0.16, 0.92)
@@ -38,47 +39,15 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Ekwipunek" type="CanvasLayer"]
+[node name="Ekwipunek" type="Node2D"]
+z_index = 5
 script = ExtResource("1_ekwipunek")
 
-[node name="Zakladki" type="HBoxContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
-offset_top = 8.0
-offset_right = -10.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_constants/separation = 4
-
-[node name="ZakladkaEkwipunek" type="Button" parent="Zakladki"]
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Ekwipunek"
-
-[node name="ZakladkaPlecak" type="Button" parent="Zakladki"]
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Plecak"
-
-[node name="ZakladkaKowal" type="Button" parent="Zakladki"]
-custom_minimum_size = Vector2(0, 28)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Kowal"
-
 [node name="Panel" type="PanelContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
+offset_left = 922.0
 offset_top = 46.0
-offset_right = -10.0
+offset_right = 1142.0
 offset_bottom = 166.0
-grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="Margin" type="MarginContainer" parent="Panel"]
@@ -204,14 +173,10 @@ text = ""
 horizontal_alignment = 1
 
 [node name="PlecakPanel" type="PanelContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
+offset_left = 922.0
 offset_top = 176.0
-offset_right = -10.0
+offset_right = 1142.0
 offset_bottom = 326.0
-grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="Margin" type="MarginContainer" parent="PlecakPanel"]
@@ -389,14 +354,14 @@ text = ""
 horizontal_alignment = 1
 
 [node name="KowalPanel" type="PanelContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
-offset_top = 46.0
-offset_right = -10.0
-offset_bottom = 276.0
-grow_horizontal = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 126.0
+offset_top = 24.0
+offset_right = 526.0
+offset_bottom = 494.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="Margin" type="MarginContainer" parent="KowalPanel"]
@@ -424,23 +389,96 @@ theme_override_font_sizes/font_size = 12
 text = "Kamienie Kowalskie: 0"
 horizontal_alignment = 1
 
-[node name="Info" type="Label" parent="KowalPanel/Margin/VBox"]
+[node name="KowalSloty" type="HBoxContainer" parent="KowalPanel/Margin/VBox"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="KamienBox" type="VBoxContainer" parent="KowalPanel/Margin/VBox/KowalSloty"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Podpis" type="Label" parent="KowalPanel/Margin/VBox/KowalSloty/KamienBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.7, 0.5, 1)
 theme_override_font_sizes/font_size = 10
-text = "Przeciągnij Miecz/Tarczę tutaj, aby ulepszyć (50/25/25)"
+text = "KAMIEŃ"
 horizontal_alignment = 1
-autowrap_mode = 2
 
-[node name="Scroll" type="ScrollContainer" parent="KowalPanel/Margin/VBox"]
-custom_minimum_size = Vector2(0, 0)
+[node name="KamienSlot" type="PanelContainer" parent="KowalPanel/Margin/VBox/KowalSloty/KamienBox"]
+custom_minimum_size = Vector2(150, 56)
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
 
-[node name="Lista" type="VBoxContainer" parent="KowalPanel/Margin/VBox/Scroll"]
+[node name="VBox" type="VBoxContainer" parent="KowalPanel/Margin/VBox/KowalSloty/KamienBox/KamienSlot"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="KowalPanel/Margin/VBox/KowalSloty/KamienBox/KamienSlot/VBox"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="KowalPanel/Margin/VBox/KowalSloty/KamienBox/KamienSlot/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="PrzedmiotBox" type="VBoxContainer" parent="KowalPanel/Margin/VBox/KowalSloty"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Podpis" type="Label" parent="KowalPanel/Margin/VBox/KowalSloty/PrzedmiotBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.7, 0.5, 1)
+theme_override_font_sizes/font_size = 10
+text = "PRZEDMIOT"
+horizontal_alignment = 1
+
+[node name="PrzedmiotSlot" type="PanelContainer" parent="KowalPanel/Margin/VBox/KowalSloty/PrzedmiotBox"]
+custom_minimum_size = Vector2(150, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="KowalPanel/Margin/VBox/KowalSloty/PrzedmiotBox/PrzedmiotSlot"]
+layout_mode = 2
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Icona" type="ColorRect" parent="KowalPanel/Margin/VBox/KowalSloty/PrzedmiotBox/PrzedmiotSlot/VBox"]
+custom_minimum_size = Vector2(60, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Nazwa" type="Label" parent="KowalPanel/Margin/VBox/KowalSloty/PrzedmiotBox/PrzedmiotSlot/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+mouse_filter = 2
+text = ""
+horizontal_alignment = 1
+
+[node name="UderzButton" type="Button" parent="KowalPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 4
+theme_override_font_sizes/font_size = 14
+text = "⚒ UDERZ MŁOTEM"
+
+[node name="Wskaznik" type="Control" parent="KowalPanel/Margin/VBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+script = ExtResource("2_wskaznik")
 
 [node name="Wynik" type="Label" parent="KowalPanel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 40)
@@ -453,14 +491,10 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="KoszPanel" type="PanelContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -230.0
+offset_left = 922.0
 offset_top = 336.0
-offset_right = -10.0
+offset_right = 1142.0
 offset_bottom = 386.0
-grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kosz")
 
 [node name="KoszLabel" type="Label" parent="KoszPanel"]

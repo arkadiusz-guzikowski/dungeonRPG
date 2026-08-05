@@ -7,7 +7,20 @@
 [ext_resource type="PackedScene" path="res://walka.tscn" id="4_walka"]
 [ext_resource type="PackedScene" path="res://ekwipunek.tscn" id="5_ekwipunek"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_buttons"]
+bg_color = Color(0.1, 0.1, 0.14, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Node2D" type="Node2D" unique_id=2028494352]
+position = Vector2(-1, -1)
 script = ExtResource("0_main")
 
 [node name="Mapa" parent="." unique_id=12766599 instance=ExtResource("1_mapa")]
@@ -17,7 +30,6 @@ rozmiar_mapy = Vector2(400, 200)
 
 [node name="Potwory" parent="." unique_id=488659601 instance=ExtResource("2_potwory")]
 position = Vector2(126, 24)
-czas_respawnu = null
 
 [node name="Gracz" parent="." unique_id=2096362487 instance=ExtResource("3_gracz")]
 position = Vector2(610, 62)
@@ -32,3 +44,29 @@ waga_plus4 = 7.0
 waga_plus5 = 3.0
 
 [node name="Ekwipunek" parent="." unique_id=-546747729 instance=ExtResource("5_ekwipunek")]
+position = Vector2(-16, -17)
+kowal_pozycja = Vector2(126, 184)
+
+[node name="Przyciski" type="CanvasLayer" parent="." unique_id=877125123]
+layer = 10
+
+[node name="Panel" type="PanelContainer" parent="Przyciski" unique_id=1061791905]
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 116.0
+offset_bottom = 104.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_buttons")
+
+[node name="VBox" type="VBoxContainer" parent="Przyciski/Panel" unique_id=1357378979]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MapaButton" type="Button" parent="Przyciski/Panel/VBox" unique_id=4514052]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "🗺 MAPA"
+
+[node name="KowalButton" type="Button" parent="Przyciski/Panel/VBox" unique_id=1588391512]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "⚒ KOWAL"
