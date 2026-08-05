@@ -38,10 +38,10 @@ func _aktualizuj() -> void:
 			bonus = _ekwipunek.bonus_obrazenia()
 		label_obrazenia.text = "obrazenia  %d-%d" % [obrazenia_min + bonus, obrazenia_max + bonus]
 	if label_obrona:
-		var obrona: int = 0
+		var redukcja_label: int = 0
 		if _ekwipunek and _ekwipunek.has_method("redukcja_obrazen"):
-			obrona = _ekwipunek.redukcja_obrazen()
-		label_obrona.text = "obrona  %d" % obrona
+			redukcja_label = _ekwipunek.redukcja_obrazen()
+		label_obrona.text = "obrona  %d" % redukcja_label
 
 
 func atakuj() -> int:

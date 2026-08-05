@@ -26,6 +26,18 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kosz"]
+bg_color = Color(0.3, 0.12, 0.12, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.85, 0.3, 0.3, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Ekwipunek" type="CanvasLayer"]
 script = ExtResource("1_ekwipunek")
 
@@ -383,7 +395,7 @@ anchor_right = 1.0
 offset_left = -230.0
 offset_top = 46.0
 offset_right = -10.0
-offset_bottom = 326.0
+offset_bottom = 276.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
@@ -416,12 +428,18 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
 theme_override_font_sizes/font_size = 10
-text = "Ulepsz: 50% sukces | 25% nic | 25% zniszczenie"
+text = "Przeciągnij Miecz/Tarczę tutaj, aby ulepszyć (50/25/25)"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Lista" type="VBoxContainer" parent="KowalPanel/Margin/VBox"]
+[node name="Scroll" type="ScrollContainer" parent="KowalPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Lista" type="VBoxContainer" parent="KowalPanel/Margin/VBox/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 4
 
 [node name="Wynik" type="Label" parent="KowalPanel/Margin/VBox"]
@@ -433,3 +451,23 @@ text = ""
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="KoszPanel" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 336.0
+offset_right = -10.0
+offset_bottom = 386.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kosz")
+
+[node name="KoszLabel" type="Label" parent="KoszPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 13
+text = "🗑 KOSZ — upuść tutaj, aby usunąć"
+horizontal_alignment = 1
+vertical_alignment = 1
+mouse_filter = 2
