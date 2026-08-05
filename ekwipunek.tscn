@@ -29,14 +29,43 @@ corner_radius_bottom_left = 4
 [node name="Ekwipunek" type="CanvasLayer"]
 script = ExtResource("1_ekwipunek")
 
+[node name="Zakladki" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/separation = 4
+
+[node name="ZakladkaEkwipunek" type="Button" parent="Zakladki"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ekwipunek"
+
+[node name="ZakladkaPlecak" type="Button" parent="Zakladki"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Plecak"
+
+[node name="ZakladkaKowal" type="Button" parent="Zakladki"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Kowal"
+
 [node name="Panel" type="PanelContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -230.0
-offset_top = 10.0
+offset_top = 46.0
 offset_right = -10.0
-offset_bottom = 130.0
+offset_bottom = 166.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
@@ -167,9 +196,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -230.0
-offset_top = 140.0
+offset_top = 176.0
 offset_right = -10.0
-offset_bottom = 290.0
+offset_bottom = 326.0
 grow_horizontal = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
@@ -346,3 +375,61 @@ theme_override_font_sizes/font_size = 8
 mouse_filter = 2
 text = ""
 horizontal_alignment = 1
+
+[node name="KowalPanel" type="PanelContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -230.0
+offset_top = 46.0
+offset_right = -10.0
+offset_bottom = 326.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="KowalPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox" type="VBoxContainer" parent="KowalPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Tytul" type="Label" parent="KowalPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.6, 0.2, 1)
+theme_override_font_sizes/font_size = 14
+text = "⚒ KOWAL"
+horizontal_alignment = 1
+
+[node name="Kamienie" type="Label" parent="KowalPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.8, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "Kamienie Kowalskie: 0"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="KowalPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 10
+text = "Ulepsz: 50% sukces | 25% nic | 25% zniszczenie"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Lista" type="VBoxContainer" parent="KowalPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Wynik" type="Label" parent="KowalPanel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = ""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

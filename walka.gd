@@ -16,6 +16,8 @@ var szansa_mikstury: float = 0.5
 @export_range(0.0, 1.0, 0.01)
 var szansa_przedmiotu: float = 0.5
 @export_range(0.0, 1.0, 0.01)
+var szansa_kamienia: float = 0.35
+@export_range(0.0, 1.0, 0.01)
 var szansa_miecza: float = 0.5
 @export_range(0.0, 100.0, 1.0)
 var waga_zwykly: float = 40.0
@@ -174,6 +176,7 @@ func _losuj_dropy() -> Array:
 	# - tylko mikstura
 	# - tylko JEDEN przedmiot ekwipunku (Miecz ALBO Tarcza)
 	# - mikstura + jeden przedmiot ekwipunku
+	# - Kamien Kowalski (osobny, niezalezny rzut)
 	# NIGDY nie wypadaja dwa przedmioty ekwipunku naraz
 	var wynik: Array = []
 	if randf() < szansa_mikstury:
@@ -181,6 +184,8 @@ func _losuj_dropy() -> Array:
 	if randf() < szansa_przedmiotu:
 		var typ: String = "Miecz" if randf() < szansa_miecza else "Tarcza"
 		wynik.append(_nazwa_z_poziomem(typ, _losuj_poziom()))
+	if randf() < szansa_kamienia:
+		wynik.append("Kamien Kowalski")
 	return wynik
 
 

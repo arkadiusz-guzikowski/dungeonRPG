@@ -7,14 +7,22 @@ var przedmioty: Array[String] = ["Miecz", "Tarcza", "", ""]
 # Plecak (przechowywane przedmioty) - 6 slotow
 var plecak: Array[String] = ["", "", "", "", "", ""]
 
+# ==== USTAWIENIA KOWALA (edytowalne w inspektorze) ====
+@export_range(0.0, 1.0, 0.01)
+var szansa_sukcesu: float = 0.5
+@export_range(0.0, 1.0, 0.01)
+var szansa_zniszczenia: float = 0.25
+
 const BAZA := {
 	"Miecz": {"bonus_obrazenia": 1, "kolor": Color(0.75, 0.78, 0.85, 1)},
 	"Tarcza": {"redukcja_obrazen": 1, "kolor": Color(0.35, 0.55, 0.85, 1)},
 	"Mikstura zycia": {"leczenie": 50, "kolor": Color(0.9, 0.3, 0.3, 1)},
+	"Kamien Kowalski": {"kolor": Color(0.6, 0.5, 0.4, 1)},
 }
 
 var slot_nodes: Array = []
 var plecak_nodes: Array = []
+var kowal_przyciski: Array = []
 
 var popup: PopupMenu
 var menu_opcje: Array = []
@@ -35,6 +43,10 @@ func _ready() -> void:
 	popup = PopupMenu.new()
 	add_child(popup)
 	popup.id_pressed.connect(_on_popup_id)
+	$Zakladki/ZakladkaEkwipunek.pressed.connect(_pokaz_zakladke.bind("ekwipunek"))
+	$Zakladki/ZakladkaPlecak.pressed.connect(_pokaz_zakladke.bind("plecak"))
+	$Zakladki/ZakladkaKowal.pressed.connect(_pokaz_zakladke.bind("kowal"))
+	_pokaz_zakladke("ekwipunek")
 	_odswiez()
 
 
@@ -44,6 +56,14 @@ func _ustaw_myszke(slot: PanelContainer, wlacz: bool) -> void:
 		child.mouse_filter = Control.MOUSE_FILTER_IGNORE if wlacz else Control.MOUSE_FILTER_STOP
 		for sub in child.get_children():
 			sub.mouse_filter = Control.MOUSE_FILTER_IGNORE if wlacz else Control.MOUSE_FILTER_STOP
+
+
+func _pokaz_zakladke(zakladka: String) -> void:
+	$Panel.visible = zakladka == "ekwipunek"
+	$PlecakPanel.visible = zakladka == "ekwipunek" or zakladka == "plecak"
+	$KowalPanel.visible = zakladka == "kowal"
+	if zakladka == "kowal":
+		_aktualizuj_kowala()
 
 
 func _on_slot_gui_input(event: InputEvent, index: int) -> void:
@@ -62,8 +82,10 @@ func _on_plecak_gui_input(event: InputEvent, index: int) -> void:
 		var opcje: Array = ["Usun"]
 		if _czy_mikstura(nazwa):
 			opcje.insert(0, "Uzyj")
-		else:
+		elif _czy_ulepszalny(nazwa):
 			opcje.insert(0, "Zaloz")
+			if _liczba_kamieni() > 0:
+				opcje.insert(1, "Ulepsz u Kowala")
 		_otworz_menu(opcje, {"skad": "plecak", "index": index})
 
 
@@ -92,6 +114,8 @@ func _on_popup_id(id: int) -> void:
 			_uzyj_mikstury(index)
 		"Zdejmij do plecaka":
 			_odloz_do_plecaka(index)
+		"Ulepsz u Kowala":
+			_ulepsz_przedmiot(index)
 		"Usun":
 			_usun(skad, index)
 
@@ -150,6 +174,91 @@ func _uzyj_mikstury(index: int) -> void:
 	_odswiez()
 
 
+# ==== KOWAL - ULEPSZANIE PRZEDMIOTOW ====
+
+func _czy_ulepszalny(nazwa: String) -> bool:
+	var b: String = _baza(nazwa)
+	return b == "Miecz" or b == "Tarcza"
+
+
+func _liczba_kamieni() -> int:
+	var ile: int = 0
+	for p in plecak:
+		if p == "Kamien Kowalski":
+			ile += 1
+	return ile
+
+
+func _zuzyj_kamien() -> void:
+	for i in range(plecak.size()):
+		if plecak[i] == "Kamien Kowalski":
+			plecak[i] = ""
+			return
+
+
+func _aktualizuj_kowala() -> void:
+	for b in kowal_przyciski:
+		b.queue_free()
+	kowal_przyciski.clear()
+	var kamienie_label: Label = $KowalPanel/Margin/VBox/Kamienie
+	kamienie_label.text = "Kamienie Kowalskie: %d" % _liczba_kamieni()
+	for i in range(plecak.size()):
+		var nazwa: String = plecak[i]
+		if nazwa == "" or not _czy_ulepszalny(nazwa):
+			continue
+		var przycisk: Button = Button.new()
+		przycisk.text = "⚒ Ulepsz: %s" % nazwa
+		przycisk.custom_minimum_size = Vector2(0, 26)
+		przycisk.pressed.connect(_on_kowal_przycisk.bind(i))
+		$KowalPanel/Margin/VBox/Lista.add_child(przycisk)
+		kowal_przyciski.append(przycisk)
+	if kowal_przyciski.size() == 0:
+		var brak: Label = Label.new()
+		brak.text = "(Brak przedmiotów do ulepszenia)"
+		brak.add_theme_color_override("font_color", Color(0.6, 0.6, 0.6, 1))
+		$KowalPanel/Margin/VBox/Lista.add_child(brak)
+		kowal_przyciski.append(brak)
+
+
+func _on_kowal_przycisk(index: int) -> void:
+	if _liczba_kamieni() <= 0:
+		_komunikat_kowal("Brak Kamienia Kowalskiego!")
+		return
+	var nazwa: String = plecak[index]
+	if nazwa == "":
+		return
+	_otworz_menu(["Ulepsz (1x Kamien Kowalski)"], {"skad": "kowal", "index": index})
+
+
+func _ulepsz_przedmiot(index: int) -> void:
+	if index < 0 or index >= plecak.size():
+		return
+	var nazwa: String = plecak[index]
+	if nazwa == "" or not _czy_ulepszalny(nazwa):
+		return
+	if _liczba_kamieni() <= 0:
+		_komunikat_kowal("Brak Kamienia Kowalskiego!")
+		return
+	_zuzyj_kamien()
+	var los: float = randf()
+	if los < szansa_sukcesu:
+		# 50% - sukces: przedmiot dostaje +1
+		plecak[index] = "%s +%d" % [_baza(nazwa), _poziom(nazwa) + 1]
+		_komunikat_kowal("✅ SUKCES! %s -> %s" % [nazwa, plecak[index]])
+	elif los < szansa_sukcesu + szansa_zniszczenia:
+		# 25% - przedmiot psuje sie i znika
+		plecak[index] = ""
+		_komunikat_kowal("💥 %s zniszczony!" % nazwa)
+	else:
+		# 25% - nic sie nie dzieje
+		_komunikat_kowal("❌ Nieudane... %s zostaje." % nazwa)
+	_odswiez()
+
+
+func _komunikat_kowal(tekst: String) -> void:
+	$KowalPanel/Margin/VBox/Wynik.text = tekst
+
+
 func _czy_mikstura(nazwa: String) -> bool:
 	return _baza(nazwa) == "Mikstura zycia"
 
@@ -203,6 +312,7 @@ func dodaj_przedmiot(nazwa: String) -> void:
 func _odswiez() -> void:
 	_odswiez_sloty(slot_nodes, przedmioty)
 	_odswiez_sloty(plecak_nodes, plecak)
+	_aktualizuj_kowala()
 	ekwipunek_zmieniony.emit()
 
 
