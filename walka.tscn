@@ -1,0 +1,123 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://walka.gd" id="1_walka"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tlo"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gracz"]
+bg_color = Color(0.2, 1, 0.2, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_potwor"]
+bg_color = Color(0.2, 1, 0.2, 1)
+
+[node name="Walka" type="CanvasLayer"]
+script = ExtResource("1_walka")
+
+[node name="Tlo" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="VBox" type="VBoxContainer" parent="Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Title" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "WALKA!"
+horizontal_alignment = 1
+
+[node name="Info" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "Gracz vs Potwor"
+horizontal_alignment = 1
+
+[node name="GraczHp" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 1, 0.5, 1)
+theme_override_font_sizes/font_size = 20
+text = "Gracz HP: 50"
+
+[node name="GraczHpBar" type="ProgressBar" parent="Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+theme_override_styles/background = SubResource("StyleBoxFlat_tlo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_gracz")
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="PotworHp" type="Label" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Potwor HP: 10"
+
+[node name="PotworHpBar" type="ProgressBar" parent="Panel/Margin/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 24)
+theme_override_styles/background = SubResource("StyleBoxFlat_tlo")
+theme_override_styles/fill = SubResource("StyleBoxFlat_potwor")
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="Log" type="RichTextLabel" parent="Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 18
+size_flags_vertical = 3
+text = ""
+
+[node name="DropPanel" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Margin" type="MarginContainer" parent="DropPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 100
+
+[node name="VBox" type="VBoxContainer" parent="DropPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="DropTitle" type="Label" parent="DropPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
+theme_override_font_sizes/font_size = 32
+text = "DROP"
+horizontal_alignment = 1
+
+[node name="DropContent" type="Label" parent="DropPanel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "— pusto —"
+horizontal_alignment = 1
+
+[node name="DropButton" type="Button" parent="DropPanel/Margin/VBox"]
+layout_mode = 2
+text = "OK"

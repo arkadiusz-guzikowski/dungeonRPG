@@ -1,0 +1,28 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://gracz.gd" id="1_gracz"]
+
+[node name="Gracz" type="Node2D"]
+script = ExtResource("1_gracz")
+
+[node name="Kolo" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(12, 0, 11.0874, 4.5925, 8.4853, 8.4853, 4.5925, 11.0874, 0, 12, -4.5925, 11.0874, -8.4853, 8.4853, -11.0874, 4.5925, -12, 0, -11.0874, -4.5925, -8.4853, -8.4853, -4.5925, -11.0874, 0, -12, 4.5925, -11.0874, 8.4853, -8.4853, 11.0874, -4.5925)
+color = Color(0, 1, 0, 1)
+
+[node name="PlayerLabel" type="Label" parent="."]
+position = Vector2(-100, -42)
+size = Vector2(200, 20)
+text = "player"
+horizontal_alignment = 1
+
+[node name="HpLabel" type="Label" parent="."]
+position = Vector2(-100, 20)
+size = Vector2(200, 20)
+text = "HP 50"
+horizontal_alignment = 1
+
+[node name="ObrazeniaLabel" type="Label" parent="."]
+position = Vector2(-100, 42)
+size = Vector2(200, 20)
+text = "obrazenia  1-2"
+horizontal_alignment = 1

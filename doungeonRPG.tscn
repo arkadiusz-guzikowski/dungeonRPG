@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ccwyk231pfj3a"]
+
+[ext_resource type="Script" uid="uid://c4fu24gr43e3e" path="res://doungeon_rpg.gd" id="0_main"]
+[ext_resource type="PackedScene" path="res://mapa.tscn" id="1_mapa"]
+[ext_resource type="PackedScene" path="res://potwory.tscn" id="2_potwory"]
+[ext_resource type="PackedScene" path="res://gracz.tscn" id="3_gracz"]
+[ext_resource type="PackedScene" path="res://walka.tscn" id="4_walka"]
+
+[node name="Node2D" type="Node2D" unique_id=2028494352]
+script = ExtResource("0_main")
+
+[node name="Mapa" parent="." unique_id=12766599 instance=ExtResource("1_mapa")]
+position = Vector2(126, 24)
+polygon = PackedVector2Array(0, 0, 400, 0, 400, 200, 0, 200)
+rozmiar_mapy = Vector2(400, 200)
+
+[node name="Potwory" parent="." unique_id=488659601 instance=ExtResource("2_potwory")]
+position = Vector2(126, 24)
+
+[node name="Gracz" parent="." unique_id=2096362487 instance=ExtResource("3_gracz")]
+position = Vector2(610, 62)
+
+[node name="Walka" parent="." unique_id=517899344 instance=ExtResource("4_walka")]
+czas_miedzy_turami = 0.2
+czas_po_ataku = 0.15

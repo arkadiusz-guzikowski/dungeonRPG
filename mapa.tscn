@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://mapa.gd" id="1_mapa"]
+
+[node name="Mapa" type="Polygon2D"]
+polygon = PackedVector2Array(0, 0, 900, 0, 900, 600, 0, 600)
+color = Color(1, 1, 1, 1)
+script = ExtResource("1_mapa")
