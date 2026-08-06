@@ -9,9 +9,10 @@ const KOLOR_SKELETON := Color(0.5, 0.5, 0.5, 1)
 const KOLOR_CHAMPION := Color(1, 0, 0, 1)
 
 const STATYSTYKI := {
-	KOLOR_ZOMBI: {"nazwa": "Zombi", "hp": 15, "obrazenia_min": 1, "obrazenia_max": 2},
-	KOLOR_GHUL: {"nazwa": "Ghul", "hp": 10, "obrazenia_min": 1, "obrazenia_max": 3},
-	KOLOR_SKELETON: {"nazwa": "Skeleton", "hp": 10, "obrazenia_min": 1, "obrazenia_max": 2},
+	KOLOR_ZOMBI: {"nazwa": "Zombi", "hp": 15, "obrazenia_min": 1, "obrazenia_max": 2, "złoto_min": 0, "złoto_max": 3},
+	KOLOR_GHUL: {"nazwa": "Ghul", "hp": 10, "obrazenia_min": 1, "obrazenia_max": 3, "złoto_min": 0, "złoto_max": 3},
+	KOLOR_SKELETON: {"nazwa": "Skeleton", "hp": 10, "obrazenia_min": 1, "obrazenia_max": 2, "złoto_min": 0, "złoto_max": 3},
+	KOLOR_CHAMPION: {"nazwa": "Champion", "hp": 30, "obrazenia_min": 2, "obrazenia_max": 4, "złoto_min": 3, "złoto_max": 10},
 }
 
 @export var czas_niewidoczny: float = 5.0

@@ -5,14 +5,16 @@ extends Node2D
 @export var hp_max: int = 50
 @export var obrazenia_min: int = 1
 @export var obrazenia_max: int = 2
+@export var zloto: int = 0
 
 var kolo: Polygon2D
 var label_player: Label
 var label_hp: Label
 var label_obrazenia: Label
 var label_obrona: Label
+var label_zloto: Label
 
-var _ekwipunek: CanvasLayer
+var _ekwipunek: Node2D
 
 
 func _ready() -> void:
@@ -21,7 +23,8 @@ func _ready() -> void:
 	label_hp = get_node_or_null("HpLabel") as Label
 	label_obrazenia = get_node_or_null("ObrazeniaLabel") as Label
 	label_obrona = get_node_or_null("ObronaLabel") as Label
-	_ekwipunek = get_node_or_null("/root/Node2D/Ekwipunek") as CanvasLayer
+	label_zloto = get_node_or_null("ZlotoLabel") as Label
+	_ekwipunek = get_node_or_null("/root/Node2D/Ekwipunek") as Node2D
 	if _ekwipunek and not _ekwipunek.ekwipunek_zmieniony.is_connected(_aktualizuj):
 		_ekwipunek.ekwipunek_zmieniony.connect(_aktualizuj)
 	_aktualizuj()
@@ -42,6 +45,8 @@ func _aktualizuj() -> void:
 		if _ekwipunek and _ekwipunek.has_method("redukcja_obrazen"):
 			redukcja_label = _ekwipunek.redukcja_obrazen()
 		label_obrona.text = "obrona  %d" % redukcja_label
+	if label_zloto:
+		label_zloto.text = "gold  %d" % zloto
 
 
 func atakuj() -> int:
@@ -66,4 +71,9 @@ func otrzymaj_obrazenia(ilosc: int) -> void:
 
 func lecz(ile: int) -> void:
 	hp = mini(hp_max, hp + ile)
+	_aktualizuj()
+
+
+func dodaj_zloto(ile: int) -> void:
+	zloto += ile
 	_aktualizuj()

@@ -20,7 +20,6 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="Node2D" type="Node2D" unique_id=2028494352]
-position = Vector2(-1, -1)
 script = ExtResource("0_main")
 
 [node name="Mapa" parent="." unique_id=12766599 instance=ExtResource("1_mapa")]

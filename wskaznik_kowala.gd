@@ -113,9 +113,12 @@ func _losuj_kat_wzgledny(wynik: String) -> float:
 func animuj_do_wyniku(wynik: String) -> void:
 	var kat_wzgledny := _losuj_kat_wzgledny(wynik)
 	var cel_abs: float = -PI / 2.0 + kat_wzgledny
-	var obecny: float = posmod(wskazowka_kat, TAU)
+	# Reset do pozycji startowej (góra tarczy) przed każdym losowaniem,
+	# aby każde uderzenie wyglądało identycznie jak pierwsze.
+	wskazowka_kat = -PI / 2.0
+	var obecny: float = wskazowka_kat
 	var obroty: float = float(randi_range(3, 5)) * TAU
-	var do_celu: float = posmod(cel_abs - obecny, TAU)
+	var do_celu: float = fposmod(cel_abs - obecny, TAU)
 	var docelowy: float = obecny + obroty + do_celu
 	var tween := create_tween()
 	tween.tween_property(self, "wskazowka_kat", docelowy, 1.7) \

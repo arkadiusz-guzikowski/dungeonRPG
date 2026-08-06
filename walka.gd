@@ -38,6 +38,8 @@ var potwor_nazwa: String = ""
 var potwor_hp: int = 0
 var potwor_atak_min: int = 1
 var potwor_atak_max: int = 2
+var potwor_zloto_min: int = 0
+var potwor_zloto_max: int = 0
 var walka_trwa: bool = false
 var gracz_max_hp: int = 1
 var potwor_max_hp: int = 1
@@ -81,6 +83,8 @@ func start_walka(potwor_p: Polygon2D) -> void:
 	potwor_max_hp = potwor_hp
 	potwor_atak_min = staty["obrazenia_min"]
 	potwor_atak_max = staty["obrazenia_max"]
+	potwor_zloto_min = staty.get("złoto_min", 0)
+	potwor_zloto_max = staty.get("złoto_max", 0)
 	walka_trwa = true
 	gracz_max_hp = gracz.hp_max
 	gracz_hp_bar.max_value = gracz_max_hp
@@ -101,7 +105,7 @@ func _statystyki() -> Dictionary:
 		var staty = potwory.STATYSTYKI.get(potwor.color)
 		if staty:
 			return staty
-	return {"nazwa": "Champion", "hp": 30, "obrazenia_min": 2, "obrazenia_max": 4}
+	return {"nazwa": "Champion", "hp": 30, "obrazenia_min": 2, "obrazenia_max": 4, "złoto_min": 0, "złoto_max": 0}
 
 
 func _aktualizuj_hp() -> void:
@@ -159,10 +163,17 @@ func _wygrana() -> void:
 	for drop in dropy:
 		if ekwipunek and ekwipunek.has_method("dodaj_przedmiot"):
 			ekwipunek.dodaj_przedmiot(drop)
+	var zloto: int = 0
+	if gracz and gracz.has_method("dodaj_zloto"):
+		zloto = randi_range(potwor_zloto_min, potwor_zloto_max)
+		gracz.dodaj_zloto(zloto)
 	var content: Label = $DropPanel/Margin/VBox/DropContent
-	if dropy.size() > 0:
-		content.text = "Wypadło: %s" % ", ".join(PackedStringArray(dropy))
-		_dodaj_log("🎁 Drop: %s" % ", ".join(PackedStringArray(dropy)))
+	var opisy: Array = dropy.duplicate()
+	if zloto > 0:
+		opisy.append("🪙 Złoto: %d" % zloto)
+	if opisy.size() > 0:
+		content.text = "Wypadło: %s" % ", ".join(PackedStringArray(opisy))
+		_dodaj_log("🎁 Drop: %s" % ", ".join(PackedStringArray(opisy)))
 	else:
 		content.text = "Nic nie wypadło... 🍀"
 		_dodaj_log("Nic nie wypadło...")

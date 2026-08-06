@@ -32,3 +32,9 @@ position = Vector2(-100, 64)
 size = Vector2(200, 20)
 text = "obrona  0"
 horizontal_alignment = 1
+
+[node name="ZlotoLabel" type="Label" parent="."]
+position = Vector2(-100, 86)
+size = Vector2(200, 20)
+text = "gold  0"
+horizontal_alignment = 1
